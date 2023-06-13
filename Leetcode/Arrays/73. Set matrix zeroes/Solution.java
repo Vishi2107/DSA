@@ -32,7 +32,7 @@
 
 // Optimal approach
 // T(n)=O(2*m*n)
-// S(n)=O(n**2)
+// S(n)=O(1)
 
 import java.util.Arrays;
 class Solution {
