@@ -39,3 +39,17 @@ class Solution {
         System.out.println(s.maxSubArray(nums));
     }
 }
+
+//Better solution T(n)= O(n2)
+// for (int i = 0; i < n; i++) {
+//             int sum = 0;
+//             for (int j = i; j < n; j++) {
+//                 // current subarray = arr[i.....j]
+
+//                 //add the current element arr[j]
+//                 // to the sum i.e. sum of arr[i...j-1]
+//                 sum += arr[j];
+
+//                 maxi = Math.max(maxi, sum); // getting the maximum
+//             }
+//         }
