@@ -13,9 +13,9 @@ class Solution {
             }
         }
 
-        if (result < target) {
-            return letters[0];                  // If the result is less than or equal to the target, return the first letter of the array
-        }
+        // if (result < target) {
+        //     return letters[0];                  // If the result is less than or equal to the target, return the first letter of the array
+        // }
         return letters[start % letters.length];  // Return the letter at the start index (next greatest letter)
     }
 }
