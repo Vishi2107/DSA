@@ -8,26 +8,44 @@
 
 class Solution {
     public int findPeakElement(int[] nums) {
-        // Initialize two pointers, 'start' and 'end', representing the start and end indices of the array.
-        int start = 0;
-        int end = nums.length - 1;
+        // Get the length of the input array
+        int n = nums.length;
+        
+        // Initialize low and high pointers for binary search
+        int low = 1, high = n - 2; // Note: These indices are chosen to avoid out-of-bounds access
+        
+        // Special cases:
+        // If the array is empty, return -1 (no peak)
+        if (n == 0)
+            return -1;
+        
+        // If the first element is greater than the second element, it's a peak
+        if (nums[0] > nums[1])
+            return 0;
+        
+        // If the last element is greater than the second-to-last element, it's a peak
+        if (nums[n - 1] > nums[n - 2])
+            return n - 1;
 
-        // Perform binary search to find a peak element efficiently.
-        while (start < end) {
-            // Calculate the middle index 'mid' of the current range using binary search.
-            int mid = start + (end - start) / 2;
+        // Perform binary search for a peak element
+        while (low <= high) {
+            // Calculate the middle index
+            int mid = low + (high - low) / 2;
 
-            // Check if the element at the middle index 'mid' is greater than the element at 'mid+1'.
-            // If true, it means the peak element should be somewhere in the left half of the array (including the element at 'mid').
-            if (nums[mid] > nums[mid + 1]) {
-                end = mid; // Update 'end' to narrow down the search to the left half of the array.
+            // Check if the element at the middle index is greater than its neighbors
+            if (nums[mid] > nums[mid + 1] && nums[mid] > nums[mid - 1]) {
+                // Found a peak, return its index
+                return mid;
+            } else if (nums[mid] > nums[mid - 1]) {
+                // If the element at mid is greater than its left neighbor, move to the right half
+                low = mid + 1;
             } else {
-                start = mid + 1; // Update 'start' to narrow down the search to the right half of the array (excluding the element at 'mid').
+                // If the element at mid is less than or equal to its left neighbor, move to the left half
+                high = mid - 1;
             }
-            mid = start + (end - start) / 2;
         }
-
-        // After the while loop finishes, 'start' will point to the index of a peak element in the array.
-        return start; // Return 'start' as the result since it points to a peak element.
+        
+        // If no peak is found within the search boundaries, return -1
+        return -1;
     }
 }
